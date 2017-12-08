@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/ericN93/module/branch/master/graph/badge.svg)](https://codecov.io/gh/ericN93/module)
 [![Build Status](https://travis-ci.org/ericN93/module.svg?branch=master)](https://travis-ci.org/ericN93/module)
 
-#### Simple command in chatt
+#### Simple command in chat
 
 ## Install
 ```
@@ -16,7 +16,7 @@ npm install simple-command-in-chat
 ## Features
 
 - A extremly easy and light command for a chat etc.
-- User enter '/catchPhrase', '/joke','/asci' and '/quote' etc and and random string will be returned from each command.
+- User enter '/catchPhrase', '/joke','/asci' and '/quote' etc and and random string will be returned from each command. '/catchPhrase' will send a random catchPhrase and '/ascii' send random single line asci picture.
 - Under development, will have more commands/values in future.
 
 ## Requirements
@@ -28,6 +28,14 @@ npm install simple-command-in-chat
 const Module = require('simple-command-in-chat');
 ```
 - Take your message in your websocket etc
-message = command.getCheckCommand(message)
+```
+sendMessage = command.getCheckCommand(sendMessage)
+```
 
 - The message will be replaced if user has send one of the commands.
+
+## Test
+- Run test with:
+```
+npm test
+```
