@@ -1,22 +1,14 @@
-sudo: required
-dist: trusty
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
 language: node_js
 node_js:
-  - "8"
-before_install:
-  - npm i npm@^4 -g
+  - 'node'
+
 install:
   - npm install
+
 script:
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
+  - npm test
+  - npm run eslint
+  - npm run codecov
+
 notifications:
   email: false

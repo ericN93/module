@@ -1,14 +1,24 @@
 {
-  "name": "simple-web-socket",
-  "version": "1.0.0",
-  "description": "simple websocket for a chat",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "name": "simple-command-in-chat",
+    "version": "1.0.0",
+    "description": "simple commands in a chat",
+    "main": "index.js",
+    "repository": {
+    "type": "git",
+    "url": "git://github.com/ericN93/module.git"
   },
-  "author": "Eric Nilsson",
-  "license": "ISC",
-  "dependencies": {
-    "ws": "^3.3.2"
-  }
+    "scripts": {
+        "test": "nyc --reporter=html --reporter=text mocha \"test/*.js\"",
+        "eslint": "eslint index.js",
+        "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov --token=ef4c2815-6549-4b73-a23b-daa8c845a8dc"
+    },
+    "author": "Eric Nilsson",
+    "license": "MIT",
+    "devDependencies": {
+        "codecov": "^3.0.0",
+        "eslint": "^4.12.1",
+        "eslint-plugin-react": "^7.5.1",
+        "mocha": "^4.0.1",
+        "nyc": "^11.4.0"
+    }
 }
