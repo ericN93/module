@@ -4,3 +4,4 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ericN93/module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ericN93/module/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/ericN93/module/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ericN93/module/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/ericN93/module/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ericN93/module/?branch=master)
+[![Build Status](https://travis-ci.org/ericN93/module.svg?branch=master)](https://travis-ci.org/ericN93/module)
