@@ -36,6 +36,32 @@ describe("Testing Module", function() {
         });
     });
 
+    describe("Testing so getCheckCommand returns correct type", function() {
+        it("/catchPhrase should return string", function() {
+            let module = new Module();
+
+            assert("string", typeof(module.getCheckCommand('/catchPhrase')));
+        });
+
+        it("/joke should return string", function() {
+            let module = new Module();
+
+            assert("string", typeof(module.getCheckCommand('/joke')));
+        });
+
+        it("/asci should return string", function() {
+            let module = new Module();
+
+            assert("string", typeof(module.getCheckCommand('/asci')));
+        });
+
+        it("/quote should return string", function() {
+            let module = new Module();
+
+            assert("string", typeof(module.getCheckCommand('/quote')));
+        });
+    });
+
     describe("Testing type of object in Module", function() {
         it("checking 'catchPhrase'", function() {
             let module = new Module();
