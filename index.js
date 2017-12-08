@@ -1,55 +1,33 @@
-'use strict';
+var io = require('socket.io').listen(5000);
+var clients = {};
 
-const webSocket = require('ws');
+var verboseServer = false; //Good for debugging the server
 
-module.exports = function(server) {
-	const wss = new webSocket.Server({
-		server: server,
-		clientTracking: true,
-		handleProtocols: (protocol) => {return 'json'}
-	});
+verboseServer && console.log("ChatServer Started"); //If Verbose Debug
+io.sockets.on('connection', function (socket) {
+  verboseServer && console.log("New Connection"); //If Verbose Debug
+  var userName;
+  socket.on('connection name',function(user){
+    verboseServer && console.log("Connection Name"); //If Verbose Debug
+    userName = user.name;
+    clients[user.name] = socket;
+    io.sockets.emit('new user', user.name + " has joined.");
+  });
 
-	let sendToAll = (ws, data) => {
-		wss.clients.forEach((client) => {
-	      	if (data.type==='connection'){
-				client.send(JSON.stringify(data));
-			} else {
-				if(client !== ws && client.readyState === webSocket.OPEN){
-					client.send(JSON.stringify(data));
-				}
-			}
-	    });
-	}
 
-	wss.on('connection', (ws, data) => {
-			let sendData = {
-				'message': {author: 'Server', message:'test'},
-				'data': {clients: wss.clients.size},
-				'type': 'connection'
-			}
-			sendToAll(ws, sendData)
+  socket.on('message', function(msg){
+    verboseServer && console.log("New msg"); //If Verbose Debug
+    io.sockets.emit('message', msg);
+  });
 
-	  ws.on('message', (data) => {
+  socket.on('private message', function(msg){
+    verboseServer && console.log("New PM"); //If Verbose Debug
+    fromMsg = {from:userName, txt:msg.txt}
+    clients[msg.to].emit('private message', fromMsg);
+  });
 
-		  let dataFromSend = JSON.parse(data)
-		  let sendData = {
-			  'message': {author: dataFromSend.message.author, message: dataFromSend.message.message},
-			  'data': {clients: wss.clients.size},
-			  'type': 'message',
-		  }
-	  		sendToAll(ws, sendData);
-	  });
-
-	  ws.on('close', (code, reason) => {
-	      console.log(`Closing connection: ${code} ${reason}`);
-		  let sendData = {
-			  'message': {author: 'Server', message:'A user has left the channel'},
-			  'data': {clients: wss.clients.size},
-			  'type': 'close'
-		  }
-		  sendToAll(ws, sendData)
-      });
-	});
-
-	return wss;
-};
+  socket.on('disconnect', function(){
+    verboseServer && console.log("disconnect"); //If Verbose Debug
+    delete clients[userName];
+  });
+});
